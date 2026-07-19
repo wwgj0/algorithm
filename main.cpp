@@ -3,7 +3,7 @@
 using namespace std;
 
 #两数之和
-class Solution {
+class Solution1 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         int a=nums.size(),i,j;
@@ -20,7 +20,7 @@ public:
 };
 
 #移动零
-class Solution {
+class Solution2 {
 public:
     void moveZeroes(vector<int>& nums) {
         int i=0,j;
@@ -36,7 +36,7 @@ public:
 };
 
 #相交链表
-class Solution {
+class Solution3 {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
    if (headA == NULL || headB == NULL) {
@@ -51,6 +51,85 @@ public:
     }
 };
 
+#反转链表
+class Solution4 {
+public:
+    ListNode* reverseList(ListNode* head) {
+            ListNode* a=head,*b=nullptr;
+        while(a)
+        {
+             ListNode* c=a->next;
+             a->next=b;
+             b=a;
+             a=c;
+        }
+        return b;
+    }
+};
+
+#回文链表
+class Solution5 {
+public:
+    bool isPalindrome(ListNode* head) {
+    vector<int> i;
+    while(head)
+    {
+        i.push_back(head->val);
+        head=head->next;
+    }
+    int left=0,right=i.size()-1;
+    while(left<right)
+    {
+        if(i[left]!=i[right])
+            return false;
+        left++;
+        right--;
+    }
+    return true;
+    }
+};
+
+#环形链表
+class Solution6 {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast && fast->next)
+         {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (fast == slow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+#合并两个有序链表
+class Solution7 {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if (list1 == NULL) {
+            return list2;
+        }
+        if (list2 == NULL) {
+            return list1;
+        }
+          if (list1->val <= list2->val)
+        {
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        }
+        else
+        {
+            list2->next = mergeTwoLists(list1,list2->next);
+            return list2;
+        }
+    }
+};
 
 int main() {
 
