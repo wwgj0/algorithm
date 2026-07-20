@@ -131,6 +131,26 @@ public:
     }
 };
 
+#二叉树的中序遍历
+class Solution8 {
+public:
+    void inorder(TreeNode* root, vector<int>& a) {
+         if (!root)
+        {
+            return;
+        }
+        inorder(root->left,a);
+        a.push_back(root->val);
+        inorder(root->right,a);
+    }
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> a;
+        inorder(root,a);
+        return a;
+    }
+};
+
 int main() {
 
     return 0;
