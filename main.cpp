@@ -151,6 +151,29 @@ public:
     }
 };
 
+#二叉树的最大深度
+class Solution9 {
+public:
+    int maxDepth(TreeNode* root) {
+        if (root == nullptr) return 0;
+        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+    }
+};
+
+#二叉树的最小深度
+class Solution10 {
+public:
+    int minDepth(TreeNode* root) {
+        if (root == nullptr)
+        return 0;
+        else if(root->left&&!root->right)
+        return minDepth(root->left)+1;
+        else if(root->right&&!root->left)
+        return minDepth(root->right)+1;
+        else
+        return min(minDepth(root->left), minDepth(root->right)) +1;
+    }
+};
 int main() {
 
     return 0;
