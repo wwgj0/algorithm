@@ -179,17 +179,71 @@ public:
 class Solution11 {
 public:
     TreeNode* invertTree(TreeNode* root) {
-      if (root == nullptr)
-      {
-            return nullptr;
+         if (!root)
+        {
+            return 0;
         }
-        TreeNode* left = invertTree(root->left);
-        TreeNode* right = invertTree(root->right);
-        root->left = right;
-        root->right = left;
+        TreeNode* a=nullptr;
+        a=root->left;
+        root->left=root->right;
+        root->right=a;
+        invertTree(root->left);
+        invertTree(root->right);
         return root;
     }
- };
+};
+
+#对称二叉树
+class Solution12 {
+public:
+    void inorderleft(TreeNode* root, vector<int>& a) {
+         if (!root)
+        {
+            a.push_back(101);
+            return;
+        }
+        a.push_back(root->val);
+        inorderleft(root->left,a);
+        inorderleft(root->right,a);
+    }
+    void inorderright(TreeNode* root, vector<int>& a) {
+         if (!root)
+        {
+            a.push_back(101);
+            return;
+        }
+        a.push_back(root->val);
+        inorderright(root->right,a);
+        inorderright(root->left,a);
+    }
+    bool isSymmetric(TreeNode* root) {
+        vector<int> a,b;
+        inorderleft(root->left,a);
+        inorderright(root->right,b);
+        if (a == b)
+            return true;
+        else
+            return false;
+    }
+};
+
+#二叉树的直径
+class Solution13 {
+public:
+    int maxDepth(TreeNode* root,int &a)
+    {
+        if (root == nullptr) return 0;
+        int b=maxDepth(root->left,a),c=maxDepth(root->right,a);
+        if(a<b+c)
+        a=b+c;
+        return max(b, c) + 1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int a=0;
+        maxDepth(root,a);
+        return a;
+    }
+};
 
 int main() {
     return 0;
