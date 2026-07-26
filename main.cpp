@@ -320,6 +320,34 @@ public:
     }
 };
 
+#买卖股票的最佳时机
+class Solution17 {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n=0,m=prices[0];
+        for(int i=0;i<prices.size();i++)
+        {
+            m=min(m,prices[i]);
+            n=max(n,prices[i]-m);
+        }
+        return n;
+    }
+};
+
+#爬楼梯
+class Solution18 {
+public:
+    int climbStairs(int n) {
+     int a=0,b=0,c=1;
+        for (int i=1;i<=n;i++)
+        {
+            a=b;
+            b=c;
+            c=a+b;
+        }
+        return c;
+    }
+};
 int main()
 {
 
