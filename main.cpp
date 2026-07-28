@@ -348,6 +348,32 @@ public:
         return c;
     }
 };
+
+#杨辉三角
+class Solution19 {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> a;
+        vector<int> b;
+        b.push_back(1);
+        a.push_back(b);
+        for(int i=2;i<=numRows;i++)
+        {
+            vector<int> c;
+            for(int j=1;j<=i;j++)
+            {
+
+                if(j==1||j==i)
+                c.push_back(1);
+                else
+                c.push_back(b[j-2]+b[j-1]);
+            }
+            b=c;
+            a.push_back(c);
+        }
+        return a;
+    }
+};
 int main()
 {
 
