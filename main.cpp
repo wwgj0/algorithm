@@ -374,6 +374,37 @@ public:
         return a;
     }
 };
+
+#只出现一次的数字
+class Solution20 {
+public:
+    int singleNumber(vector<int>& nums) {
+        int i=nums.size(),a=0;
+        while(i--)
+        {
+            a^=nums[i];
+        }
+        return a;
+    }
+};
+
+#多数元素
+class Solution21 {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int, int> cnt;
+        int n = nums.size();
+        for (int x : nums) {
+            cnt[x]++;
+        }
+        for (auto& pair : cnt) {
+            if (pair.second > n / 2) {
+                return pair.first;
+            }
+        }
+        return -1;
+    }
+};
 int main()
 {
 
