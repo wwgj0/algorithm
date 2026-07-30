@@ -405,6 +405,40 @@ public:
         return -1;
     }
 };
+
+#最长连续序列
+class Solution22 {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if (nums.empty())
+        return 0;
+        std::sort(nums.begin(), nums.end());
+        vector<int> n=nums,m;
+        m.push_back(nums[0]);
+        int i,j=0,maxn=0;
+        for(i=1;i<nums.size();i++)
+        {
+            if (nums[i]==nums[i-1])
+            {
+                continue;
+            }
+            if(m[j]==nums[i]-1)
+            {
+                m.push_back(nums[i]);
+                j++;
+            }
+            else
+            {
+                maxn=max(maxn,j+1);
+                j=0;
+                m.clear();
+                m.push_back(nums[i]);
+            }
+        }
+        maxn = max(maxn, j + 1);
+        return maxn;
+    }
+};
 int main()
 {
 
