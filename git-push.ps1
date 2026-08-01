@@ -1,23 +1,11 @@
-<#
-.SYNOPSIS
-    算法练习 - 一键提交推送脚本
-.USAGE
-    .\git-push.ps1 "提交说明"
-    .\git-push.ps1              # 不带说明则自动生成
-#>
-
-param(
+﻿param(
     [string]$Message = ""
 )
-
-$repo = "d:\练习算法"
-
-Set-Location $repo
 
 # 检查是否有改动
 $status = git status --porcelain
 if (-not $status) {
-    Write-Host "没有需要提交的改动" -ForegroundColor Yellow
+    Write-Host "No changes to commit" -ForegroundColor Yellow
     exit 0
 }
 
@@ -37,14 +25,14 @@ $maxRetry = 3
 while ($retry -lt $maxRetry) {
     git push origin main 2>&1
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "推送成功！" -ForegroundColor Green
+        Write-Host "Push succeeded!" -ForegroundColor Green
         exit 0
     }
     $retry++
     if ($retry -lt $maxRetry) {
-        Write-Host "推送失败，第 $retry 次重试..." -ForegroundColor Yellow
+        Write-Host "Push failed, retry $retry..." -ForegroundColor Yellow
         Start-Sleep -Seconds 5
     }
 }
 
-Write-Host "推送失败，请检查网络后手动执行: git push origin main" -ForegroundColor Red
+Write-Host "Push failed, please run manually: git push origin main" -ForegroundColor Red
