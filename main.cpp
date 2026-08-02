@@ -502,6 +502,30 @@ public:
         return ans;
     }
 };
+
+#找出字符串中所有字母异位词
+class Solution25 {
+public:
+    vector<int> findAnagrams(string s, string p) {
+vector<int> res;
+        int sLen = s.size(), pLen = p.size();
+        if (pLen > sLen) return res;
+        vector<int> cntP(26, 0), cntS(26, 0);
+        for (int i = 0; i < pLen; i++) {
+            cntP[p[i] - 'a']++;
+            cntS[s[i] - 'a']++;
+        }
+        if (cntP == cntS) res.push_back(0);
+        for (int i = pLen; i < sLen; i++) {
+            cntS[s[i - pLen] - 'a']--;
+            cntS[s[i] - 'a']++;
+            if (cntS == cntP) {
+                res.push_back(i - pLen + 1);
+            }
+        }
+        return res;
+    }
+};
 int main()
 {
 
