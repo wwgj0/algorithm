@@ -507,7 +507,7 @@ public:
 class Solution25 {
 public:
     vector<int> findAnagrams(string s, string p) {
-vector<int> res;
+        vector<int> res;
         int sLen = s.size(), pLen = p.size();
         if (pLen > sLen) return res;
         vector<int> cntP(26, 0), cntS(26, 0);
@@ -524,6 +524,25 @@ vector<int> res;
             }
         }
         return res;
+    }
+};
+
+#和为K的子数组
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> m;
+        m[0] = 1;
+        int Sum = 0;
+        int ans = 0;
+        for(int num : nums){
+            Sum += num;
+            if(m.count(Sum - k)){
+                ans += m[Sum - k];
+            }
+            m[Sum]++;
+        }
+        return ans;
     }
 };
 int main()
