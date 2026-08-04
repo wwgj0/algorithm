@@ -528,7 +528,7 @@ public:
 };
 
 #和为K的子数组
-class Solution {
+class Solution26 {
 public:
     int subarraySum(vector<int>& nums, int k) {
         unordered_map<int, int> m;
@@ -543,6 +543,46 @@ public:
             m[Sum]++;
         }
         return ans;
+    }
+};
+
+#最大子序和
+class Solution27 {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int pre = 0, maxAns = nums[0];
+        for (const auto &x: nums)
+        {
+            pre = max(pre + x, x);
+            maxAns = max(maxAns, pre);
+        }
+        return maxAns;
+    }
+};
+
+#合并区间
+class Solution28 {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if (intervals.size() == 0)
+        {
+            return {};
+        }
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> merged;
+        for (int i = 0; i < intervals.size(); ++i)
+        {
+            int L = intervals[i][0], R = intervals[i][1];
+            if (!merged.size() || merged.back()[1] < L)
+            {
+                merged.push_back({L, R});
+            }
+            else
+            {
+                merged.back()[1] = max(merged.back()[1], R);
+            }
+        }
+        return merged;
     }
 };
 int main()
