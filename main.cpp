@@ -585,8 +585,47 @@ public:
         return merged;
     }
 };
+
+#旋转数组
+class Solution29 {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int> m;
+        k=k%n;
+        for(int i=n-k;i<n;i++)
+        {
+            m.push_back(nums[i]);
+        }
+        for(int i=0;i<n-k;i++)
+        {
+            m.push_back(nums[i]);
+        }
+        nums=m;
+    }
+};
+
+#除自身以外数组的乘积
+class Solution30 {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n =nums.size();
+        vector<int> ans(n);
+        ans[0] = 1;
+        for (int i = 1; i < n; ++i)
+        {
+            ans[i] = ans[i - 1] * nums[i - 1];
+        }
+        int right = 1;
+        for (int i = n - 1; i >= 0; --i)
+        {
+            ans[i] *= right;
+            right *= nums[i];
+        }
+        return ans;
+    }
+};
 int main()
 {
-
     return 0;
 }
