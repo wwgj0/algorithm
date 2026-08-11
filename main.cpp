@@ -704,6 +704,56 @@ public:
         }
     }
 };
+
+#螺旋矩阵
+class Solution32 {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        if (matrix.empty())
+        return {};
+        int l = 0, r = matrix[0].size() - 1, t = 0, b = matrix.size() - 1;
+        vector<int> res;
+        while (true)
+        {
+            for (int i = l; i <= r; i++)
+            res.push_back(matrix[t][i]);
+            if (++t > b)
+            break;
+            for (int i = t; i <= b; i++)
+            res.push_back(matrix[i][r]);
+            if (l > --r)
+            break;
+            for (int i = r; i >= l; i--)
+            res.push_back(matrix[b][i]);
+            if (t > --b)
+            break;
+            for (int i = b; i >= t; i--)
+            res.push_back(matrix[i][l]);
+            if (++l > r)
+            break;
+        }
+        return res;
+    }
+};
+
+#旋转图像
+class Solution33 {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = i + 1; j < n; ++j)
+            {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        for (int i = 0; i < n; ++i)
+        {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+};
 int main()
 {
     return 0;
