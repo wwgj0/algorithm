@@ -754,6 +754,49 @@ public:
         }
     }
 };
+
+#搜索二维矩阵
+class Solution34 {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int i = matrix.size() - 1, j = 0;
+        while(i >= 0 && j < matrix[0].size())
+        {
+            if(matrix[i][j] > target)
+            i--;
+            else if(matrix[i][j] < target)
+            j++;
+            else
+            return true;
+        }
+        return false;
+    }
+};
+
+#两数相加
+class Solution35 {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* dummy = new ListNode(-1);
+        ListNode* cur = dummy;
+        int carry = 0;
+
+        while(l1 || l2 || carry)
+        {
+            int a = l1 ? l1->val : 0;
+            int b = l2 ? l2->val : 0;
+            int sum = a + b + carry;
+
+            carry = sum / 10;
+            cur->next = new ListNode(sum % 10);
+            cur = cur->next;
+
+            if(l1) l1 = l1->next;
+            if(l2) l2 = l2->next;
+        }
+        return dummy->next;
+    }
+};
 int main()
 {
     return 0;
