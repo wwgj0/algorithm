@@ -815,6 +815,21 @@ public:
         return dummy->next;
     }
 };
+
+#验证二叉搜索树
+class Solution37 {
+public:
+    long long pre = LLONG_MIN;
+    bool isValidBST(TreeNode* root) {
+        if(!root) return true;
+        if(!isValidBST(root->left))
+        return false;
+        if(root->val <= pre)
+        return false;
+        pre = root->val;
+        return isValidBST(root->right);
+    }
+};
 int main()
 {
     return 0;
