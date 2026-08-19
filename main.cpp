@@ -830,6 +830,31 @@ public:
         return isValidBST(root->right);
     }
 };
+
+#二叉树展开为链表
+class Solution38 {
+public:
+   void inorder(TreeNode* root, vector<TreeNode*>& a) {
+         if (!root)
+        {
+            return;
+        }
+        a.push_back(root);
+        inorder(root->left,a);
+        inorder(root->right,a);
+    }
+    void flatten(TreeNode* root) {
+        vector<TreeNode*> a;
+        inorder(root, a);
+        int n = a.size();
+        for (int i = 1; i < n; i++)
+        {
+            TreeNode *prev = a.at(i - 1), *curr = a.at(i);
+            prev->left = nullptr;
+            prev->right = curr;
+        }
+    }
+};
 int main()
 {
     return 0;
